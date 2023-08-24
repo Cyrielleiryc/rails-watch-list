@@ -1,23 +1,39 @@
-<h2><%= @list.name %></h2>
-<%= link_to new_list_bookmark_path(@list) do %>
-  + Add a movie to this list
-<% end %>
-<p>You have <%= @list.movies.size %> movies in this list :</p>
-<div class="cards">
-  <% @list.movies.each do |movie| %>
-    <div class="card-product">
-      <img src=<%= movie.poster_url %> />
-      <div class="card-product-infos">
-        <h2>
-        <%= movie.title %>
-        <% bookmark = Bookmark.where(movie: movie, list_id: params[:id]).take %>
-        <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-          <i class="fa-regular fa-trash-can"></i>
-        <% end %>
-        </h2>
-        <p><%= movie.overview %></p>
-        <p><%= movie.rating %> / 10</p>
-      </div>
+<div class="container">
+
+  <div class="container d-flex justify-content-between pt-2 mt-2">
+    <div>
+      <h2><%= @list.name %></h2>
+      <p>You have <%= @list.movies.size %> movies in this list :</p>
     </div>
-  <% end %>
+    <div class="align-self-center">
+      <%= link_to new_list_bookmark_path(@list), class: "btn btn-flat" do %>
+        <i class="fa-solid fa-plus" style="color: #35040b;"></i> Add a movie to this list
+      <% end %>
+    </div>
+  </div>
+
+
+    <% @list.movies.each do |movie| %>
+      <% bookmark = Bookmark.where(movie: movie, list_id: params[:id]).take %>
+      <div class="card-product mt-3">
+        <img src=<%= movie.poster_url %> />
+        <div>
+          <div class="card-product-infos">
+            <h2><%= movie.title %><span class="fw-light"> - <%= movie.rating %> </span><i class="fa-solid fa-star" style="color: #35040b;"></i></h2>
+            <p><%= movie.overview %></p>
+          </div>
+          <div class="d-flex justify-content-between card-product-infos">
+            <div>
+              <i class="fa-solid fa-quote-left" style="color: #35040b;"></i> <%= bookmark.comment %>
+            </div>
+            <div>
+              <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-regular fa-trash-can" style="color: #35040b;"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
 </div>
