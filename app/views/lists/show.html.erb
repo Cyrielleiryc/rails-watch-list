@@ -1,0 +1,23 @@
+<h2><%= @list.name %></h2>
+<%= link_to new_list_bookmark_path(@list) do %>
+  + Add a movie to this list
+<% end %>
+<p>You have <%= @list.movies.size %> movies in this list :</p>
+<div class="cards">
+  <% @list.movies.each do |movie| %>
+    <div class="card-product">
+      <img src=<%= movie.poster_url %> />
+      <div class="card-product-infos">
+        <h2>
+        <%= movie.title %>
+        <% bookmark = Bookmark.where(movie: movie, list_id: params[:id]).take %>
+        <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+          <i class="fa-regular fa-trash-can"></i>
+        <% end %>
+        </h2>
+        <p><%= movie.overview %></p>
+        <p><%= movie.rating %> / 10</p>
+      </div>
+    </div>
+  <% end %>
+</div>

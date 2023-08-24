@@ -11,6 +11,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <%= link_to lists_path, class: "navbar-brand" do %>
+          <i class="fa-regular fa-rectangle-list"></i>
+        <% end %>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
