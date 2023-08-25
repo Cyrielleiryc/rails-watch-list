@@ -58,8 +58,6 @@
         <%= simple_form_for [@list, @bookmark] do |f| %>
           <%= f.association :movie, collection: @movies %>
           <%= f.input :comment %>
-      </div>
-      <div class="modal-footer">
           <%= f.button :submit, class: "btn btn-flat" %>
         <% end %>
       </div>
