@@ -1,4 +1,9 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path @list.photo.key, crop: :fill %>');">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url('
+  <% if @list.photo.attached? %>
+    <%= cl_image_path @list.photo.key, crop: :fill %>
+  <% end %>
+');">
   <div class="container d-flex justify-content-between pt-2 mt-2">
     <div>
       <h1><%= @list.name %></h1>
