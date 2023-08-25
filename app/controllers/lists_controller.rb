@@ -3,10 +3,10 @@ class ListsController < ApplicationController
 
   def index
     @lists = List.all
+    @list = List.new
   end
 
   def new
-    @list = List.new
   end
 
   def create
@@ -19,6 +19,8 @@ class ListsController < ApplicationController
   end
 
   def show
+    @movies = Movie.all
+    @bookmark = Bookmark.new
   end
 
   private
