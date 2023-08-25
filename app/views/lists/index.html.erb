@@ -12,8 +12,12 @@
 <div class="container mt-3">
   <div class="cards">
     <% @lists.each do |list| %>
+      <% photo_key = "792363382458996" %>
+      <% if list.photo.attached? %>
+        <% photo_key = list.photo.key %>
+      <% end %>
       <%= link_to list_path(list) do %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.image %>)">
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path photo_key, crop: :fill %>')">
           <%= list.name %>
         </div>
       <% end %>
